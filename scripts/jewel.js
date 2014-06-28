@@ -70,12 +70,12 @@ var jewel  = (function(){
             jewel.showScreen("install-screen");
         }
         /*make environment fit for application*/
-        if(/Android/.test(navigator.userAgent)){
-            $("html")[0].style.height ="200%";
-            setTimeout(function () {
-                window.scrollTo(0,1);
-            });
-        }
+//        if(/Android/.test(navigator.userAgent)){
+//            $("html")[0].style.height ="200%";
+//            setTimeout(function () {
+//                window.scrollTo(0,1);
+//            });
+//        }
         jewel.dom.bind(document,"touchmove", function (event) {
             event.preventDefault();
         });

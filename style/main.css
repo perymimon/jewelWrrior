@@ -16,7 +16,7 @@ body{
     font-size: 40px;
     width:8em;
     height:12em;
-    font-family: Geo;
+    font-family: Geo,sans-serif;
     color: rgb(200,200,100);
     /*background color*/
     background-color: rgb(60, 60, 40);

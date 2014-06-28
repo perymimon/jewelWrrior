@@ -4,18 +4,18 @@
 }
 
 /*use a amaller base size for small screens*/
-@media (max-device-width: 480px) and (orientation: portrait),
-@media (max-device-width: 640px) and (orientation: landscape){
+@media (max-device-width: 7cm) and (orientation: portrait),
+@media (max-device-width: 20cm) and (orientation: landscape){
     #game {
         font-size: 32px;
     }
 }
 
 /*use a bigger base size for ipad and tablets*/
-@media (min-device-width:768px) and (orientation: portrait),
-@media (min-device-width:1024px) and (orientaion:landscape){
+@media (min-device-width: 10cm) and (orientation: portrait)
+{
     #game{
-        font-size: 64px;
+        font-size: 1cm;
     }
 }
 /*smartphones landscape*/
