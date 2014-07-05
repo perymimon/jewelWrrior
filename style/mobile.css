@@ -12,12 +12,12 @@
 }
 
 /*use a bigger base size for ipad and tablets*/
-@media (min-device-width: 10cm) and (orientation: portrait)
-{
-    #game{
-        font-size: 1cm;
-    }
-}
+/*@media (min-device-width: 10cm) and (orientation: portrait)*/
+/*{*/
+    /*#game{*/
+        /*font-size: 1cm;*/
+    /*}*/
+/*}*/
 /*smartphones landscape*/
 @media ( orientation:landscape ){
     #splash-screen,

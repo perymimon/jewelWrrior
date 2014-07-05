@@ -4,6 +4,32 @@ var jewel  = (function(){
         ,numResources = 0
         ,executeRunning = false;
 
+    var setting = {
+        rows:8,
+        cols:8,
+        baseScore:100,
+        numJewelTypes:7,
+        controls:{
+            //KEYBOARD
+            KEY_UP:'moveUp'
+            ,KEY_DOWN:'moveDown'
+            ,KEY_LEFT:'moveLeft'
+            ,KEY_RIGHT:'moveRight'
+            ,KEY_ENTER:'selectJewel'
+            ,KEY_SPACE:'selectJewel'
+            // mouse an touch
+            ,CLICK:'selectJewel'
+            ,TOUCH:'selectJewel'
+            //gamepad
+            ,BUTTON_A:'selectJewel'
+            ,LEFT_STICK_UP:'moveUp'
+            ,RIGHT_STICK_DOWN:'moveDown'
+            ,RIGHT_STICK_LEFT:'moveLeft'
+            ,RIGHT_STICK_RIGHT:'moveRight'
+
+        }
+    };
+
     function executeScriptQueue(){
         var next = scriptQueue[0]
             ,first,script;
@@ -27,6 +53,13 @@ var jewel  = (function(){
             executeRunning = false;
 
         }
+    }
+
+    function preload( src ){
+        var image = new Image();
+            image.src = src
+        ;
+
     }
 
     function load (src, callback){
@@ -96,13 +129,23 @@ var jewel  = (function(){
         jewel.screens[screenId].run();
     }
 
+    function hasWebWorkers(){
+        return ("Worker" in window);
+    }
+
+    function getLoadProgress(){
+        return numResourcesLoaded / numResources;
+    }
+
     return {
         load:load,
         setup:setup,
         showScreen:showScreen,
         isStandalone: isStandAlone,
-        screens:{
-
-        }
+        screens:{},
+        settings:setting,
+        hasWebWorker:hasWebWorkers,
+        preload: preload,
+        getLoadProgress: getLoadProgress
     }
 })();

@@ -48,6 +48,27 @@ body{
     display: block;
 }
 
+.screen footer {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    height: 1.0em;
+    width: 100%;
+}
+
+.screen footer button {
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    padding: 0 0.75em;
+    font-family: Geo, sans-serif;
+    font-size: 0.5em;
+    color: rgba(200,200,100,0.5);
+    background-color: rgba(10,20,0);
+    border: 1px solid rgba(200,200,100,0.5);
+    border-radius: 0.2em;
+    
+}
+
 #splash-screen {
     text-align: center;
     padding-top: 100px;
@@ -56,8 +77,25 @@ body{
     #splash-screen .continue {
         cursor: pointer;
         font-size: 30px;
+        display: none;
+
     }
 
+/*progress bar*/
+.progress {
+    margin: 0 auto;
+    width: 6em;
+    height: 0.5em;
+    border-radius: 0.5em;
+    overflow: hidden;
+    border: 1px solid rgb(200,200,100);
+}
+  .progress .indicator{
+      background-color: rgb(200,200,100);
+      height: 100%;
+      width: 0%;
+  }
+    
 .logo{
     font-family: Slackey,sans-serif;
     font-size: 1.5em;
@@ -66,7 +104,7 @@ body{
     text-align: center;
     color:rgb(70,120,20);
     text-shadow: 1px 1px 0.03em rgb(255,255,0),
-                 -1px -1px 0.03em rgb(255,255,0),
+                -1px -1px 0.03em rgb(255,255,0),
                 0.10em 0.15em 0.15em rgb(0,0,0);
 }
 
@@ -118,3 +156,51 @@ ul.menu{
 }
 
 
+#game-screen .game-board {
+    position: relative;
+    width: 8em;
+    height: 8em;
+}
+
+#game-screen .game-board .board-bg,
+#game-screen .game-board .board {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#game-screen .game-board .board{
+    z-index: 10;
+}
+
+#game-screen .game-board .board-bg{
+    z-index: 0;
+}
+
+/*game screen pause overlay*/
+#game-screen .pause-overlay{
+    display: none;
+    position: absolute;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: rgba(20, 20, 20, 0.5);
+}
+
+#game-screen .pause-overlay .pause-text{
+    width: 100%;
+    text-align: center;
+    margin-top: 50%;
+    font-family: Slackey;
+    font-size: 1.0em;
+    text-shadow: 0.03em 0.03em 0.03em rgb(255,255,0),
+                 -0.03em -0.03em 0.03em rgb(255,255,0),
+                  0.10em 0.15em 0.15em rgb(0,0,0)
+                  ;
+    color: rgb(70,120,20);
+
+}
