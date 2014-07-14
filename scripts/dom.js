@@ -28,12 +28,25 @@ jewel.dom = (function(){
 
     }
 
+    function transform( element, value ){
+        if("transform" in element.style ){
+            element.style.transform = value;
+        } else if("webkitTransform" in element.style){
+            element.style.webkitTransform = value;
+        } if("mozTransform" in element.style){
+            element.style.mozTransform = value;
+        } if("msTransform" in element.style){
+            element.style.msTransform = value;
+        }
+
+    }
     return{
         $:$,
         hasClass:hasClass,
         addClass:addClass,
         removeClass:removeClass,
-        bind:bind
+        bind:bind,
+        transform:transform
     };
 
 })();

@@ -2,6 +2,7 @@
  * Created by pery on 01/07/14.
  */
 var jewel = {};
+
 importScripts("board.js");
 
 /*
@@ -47,10 +48,7 @@ addEventListener("message", function ( event ) {
             id : message.id,
             data : data,
             jewels : board.getBoard()
-        })
+        });
     }
 
-});
-
-
-
+}, false);

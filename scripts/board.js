@@ -159,29 +159,25 @@ jewel.board = (function () {
                         x: x, y: y,
                         type: getJewel(x, y)
                     });
+                    score += baseScore * Math.pow(2, chains[x][y] - 3);
                 } else if (gaps[x] > 0) {
                     moved.push({
                         toX: x, toY: y + gaps[x],
                         fromX: x, fromY: y,
                         type: getJewel(x, y)
                     });
-                    score += baseScore * Math.pow(2, chains[x][y] - 3);
                     jewelsBoard[x][y + gaps[x]] = getJewel(x, y);
                 }
             }
-        }
-        //fill from top
-        for (x = 0; x < cols; x++) {
+            //fill from top
             for (y = 0; y < gaps[x]; y++) {
-                jewelsBoard[x][y] = randomJewel();
                 moved.push({
                     toX: x, toY: y,
                     fromX: x, fromY: y - gaps[x],
-                    type: jewelsBoard[x][y]
+                    type: jewelsBoard[x][y] = randomJewel()
                 });
             }
         }
-
         if ( hadChains ) {
             events.push({
                 type: "remove",
@@ -193,21 +189,20 @@ jewel.board = (function () {
                 type: 'move',
                 data: moved
             });
-            //refill if no more move
+           //refill if no more move
             if (!hasMoves()) {
                 fillBoard();
                 events.push({
                     type: "refill",
                     data: getBoard()
-                })
+                });
             }
-
             return check(events);
-        } else {
+        }else {
             return events;
         }
-
     }
+
 
     /*
     * create a copy of the jewel board
@@ -253,26 +248,49 @@ jewel.board = (function () {
     // calls the callback function eith list of board events
     function swap(x1, y1, x2,y2, callback ){
 
-        var tmp,
-            events
+        var tmp, swap1, swap2,
+            events = []
         ;
-        if( canSwap(x1, y1, x2, y2)){
-            //swap the jewles
-            tmp = getJewel(x1, y1);
-            jewelsBoard[x1][y1] = getJewel(x2, y2);
-            jewelsBoard[x2][y2] = tmp;
+        swap1 = {
+            type: 'move',
+            data:[{
+                type: getJewel(x1, y1),
+                fromX:x1, fromY: y1,
+                toX:x2, toY:y2
+            },{
+                type: getJewel(x2, y2),
+                fromX:x2, fromY: y2,
+                toX:x1, toY:y1
+            }]
+        };
 
-            //check the board and get list of events
-            events = check();
+        swap2 = {
+            type: 'move',
+            data:[{
+                type: getJewel(x2, y2),
+                fromX:x1, fromY: y1,
+                toX:x2, toY:y2
+            },{
+                type: getJewel(x1, y1),
+                fromX:x2, fromY: y2,
+                toX:x1, toY:y1
+            }]
 
-            callback( events );
-        }else{
-            callback( false );
-        }
+        };
+        if( isAdjacent(x1, y1, x2, y2)){
 
-
-
+            if(canSwap(x1, y1, x2, y2)){
+                events.push(swap1);
+                tmp = getJewel(x1,y1);
+                jewelsBoard[x1][y1] = getJewel(x2,y2);
+                jewelsBoard[x2][y2] = tmp;
+                events = events.concat( check() );
+            }else{
+                events.push({type:'badswap'},swap1,swap2 );
             }
+            callback( events );
+        }
+    }
 
     /* game function go here */
     return {

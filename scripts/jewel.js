@@ -9,6 +9,9 @@ var jewel  = (function(){
         cols:8,
         baseScore:100,
         numJewelTypes:7,
+        baseLevelScore: 1500,
+        baseLevelTimer : 60000,
+        baseLevelExp: 1.05,
         controls:{
             //KEYBOARD
             KEY_UP:'moveUp'
@@ -55,10 +58,13 @@ var jewel  = (function(){
         }
     }
 
-    function preload( src ){
+    function preload( src, callback ){
         var image = new Image();
-            image.src = src
-        ;
+        if(typeof callback === "function"){
+            image.addEventListener('load', callback, false);
+        }
+        image.src = src;
+        return image;
 
     }
 

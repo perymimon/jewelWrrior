@@ -50,7 +50,7 @@ jewel.board = (function(){
         jewelsBoard = message.jewels;
 
         if( callbacks[message.id]){
-            callbacks[message.id](message.id);
+            callbacks[message.id](message.data);
             delete callbacks[message.id];
         }
     }

@@ -1,15 +1,22 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-    <meta charset="UFT-8"/>
+    <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width user-scalable=no"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>jewel warrior</title>
+
+    <link rel="stylesheet" href="style/main.css"/>
+    <link rel="stylesheet" href="style/mobile.css"
+        media="screen and (max-device-width: 768px) and (orientation: portrait),
+               screen and (max-device-width: 1024px) and (orientation:landscape)"/>
+
     <!--icons for apple shortcuts screen-->
     <!--<link rel="apple-touch-icon"                  href="icon.png"/>-->
-    <link rel="apple-touch-icon-precomposed"          href="images/ios-icon.png"/>
-    <link rel="apple-touch-icon-precomposed"          href="images/ios-icon.png" sizes="72x72"/>
-    <link rel="apple-touch-icon-precomposed"          href="images/ios-icon.png" sizes="114x114"/>
+    <link rel="apple-touch-icon-precomposed" href="images/ios-icon.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ios-icon-ipad.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ios-icon-iphone4.png"/>
 
     <!--images for apple startup images-->
     <link media="screen and (min-device-width: 768px) and (orientation:landscape)" rel="apple-touch-startup-image"
@@ -21,14 +28,9 @@
 
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 
-    <title>jewel warrior</title>
 
-    <link rel="stylesheet" href="style/main.css"/>
-    <link rel="stylesheet" href="style/mobile.css" />
-    <!--
-        media="screen and (max-device-width : 1600px) and (orientation: portrait),
-               screen and (max-device-width : 2560px) and (orientation:landscape))"
-    -->
+
+
     <script src="scripts/jewel.js"></script>
     <script>
         window.addEventListener("load", function () {
@@ -45,6 +47,7 @@
                }
                jewel.load('scripts/screen.game.js');
                jewel.load('scripts/display.canvas.js');
+               jewel.load('scripts/audio.js');
 
            }else{
                jewel.load("scripts/screen.install.js",jewel.setup)
@@ -68,25 +71,27 @@
 
         <!--MENU-->
         <div class="screen" id="main-menu">
-            <h2 class="logo">Jewel<br>Warrior</h2>
+            <h2 class="logo">Jewel <br/>Warrior</h2>
             <ul class="menu">
-                <li>
-                    <button name="game-screen">Play</button>
-                </li>
-                <li>
-                    <button name="high-scores">High score</button>
-                </li>
-                <li>
-                    <button name="about">About</button>
-                </li>
-                <li>
-                    <button name="exit-screen">Exit</button>
-                </li>
+                <li><button name="game-screen">Play</button></li>
+                <li><button name="high-scores">High score</button></li>
+                <li><button name="about">About</button></li>
+                <li><button name="exit-screen">Exit</button></li>
             </ul>
         </div>
 
         <div class="screen" id="game-screen">
-            <div class="game-board"></div>
+            <div class="game-board jewel-size">
+                <div class="announcement"></div>
+            </div>
+            <div class="game-info">
+                <label class="level" for="">Level: <span></span></label>
+                <label class="score" for="">Score: <span></span></label>
+                <div class="time progress">
+                    <div class="indicator"></div>
+                </div>
+            </div>
+
             <footer>
                 <button class="exit">Exit</button>
                 <button class="pause">pause</button>
