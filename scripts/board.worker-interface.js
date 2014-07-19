@@ -12,14 +12,18 @@ jewel.board = (function(){
         cols
     ;
 
-    function initialize( callback ){
+    function initialize( startJewels, callback ){
         rows = jewel.settings.rows;
         cols = jewel.settings.cols;
         messageCount = 0;
         callbacks = [];
         worker = new Worker('scripts/board.worker.js');
         jewel.dom.bind( worker, "message", messageHandler );
-        post( "initialize", jewel.settings, callback );
+        var data = {
+            settings : jewel.settings
+            ,startJewels : startJewels
+        };
+        post( "initialize", data , callback );
     }
 
 

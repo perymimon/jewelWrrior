@@ -21,7 +21,7 @@ jewel.audio = (function(){
         var el = new Audio( 'sounds/' + name + '.' + extension );
         dom.bind(el, 'ended', function () {
             this.currentTime = 0;
-            
+
             cleanActive
         });
         sounds[name] = sounds[name] || [];

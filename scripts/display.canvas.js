@@ -65,7 +65,7 @@ jewel.display = (function () {
     function addAnimation( runTime, fncs){
         var anim = {
             runTime : runTime,
-            startTime : Date.now(),
+            startTimeStamp : Date.now(),
             pos:0,
             fncs: fncs
         };
@@ -85,7 +85,7 @@ jewel.display = (function () {
             anim = anims[i];
             anim.fncs.before && anim.fncs.before(anim.pos);
             anim.lastPos = anim.pos;
-            animTime = (lastTime - anim.startTime);
+            animTime = (lastTime - anim.startTimeStamp);
             anim.pos = animTime / anim.runTime;
             anim.pos = Math.max(0, Math.min(1,anim.pos));
         }
@@ -416,7 +416,7 @@ jewel.display = (function () {
     function resume( pauseTime ){
         paused = false;
         for( var i=0; i<animations.length; i++ ){
-            animations[i].startTime +=pauseTime;
+            animations[i].startTimeStamp +=pauseTime;
         }
     }
 
