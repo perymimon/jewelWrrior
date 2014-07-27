@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en-US" manifest="manifest.appcache">
+<html lang="en-US"  >
 <head>
     <meta charset="UTF-8">
 
@@ -51,9 +51,7 @@
 //               jewel.load('scripts/lib/webgl-debug.js');
                jewel.load('scripts/storage.js');
                jewel.load('scripts/screen.high-scores.js');
-
-
-
+               jewel.load('scripts/screen.about.js');
 
            }else{
                jewel.load("scripts/screen.install.js",jewel.setup)
@@ -114,6 +112,15 @@
             <footer>
                 <button name="back">Back</button>
             </footer>
+        </div>
+
+        <div class="screen" id="about">
+            <h3>
+                <a href="https://github.com/perymimon?tab=repositories">pery mimon</a>
+                <address>isreal</address>
+            </h3>
+
+            from the book<span class="book"> HTML5 GAMES</span>
         </div>
 
         <div class="screen" id="install-screen">

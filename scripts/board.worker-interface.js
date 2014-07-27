@@ -17,8 +17,10 @@ jewel.board = (function(){
         cols = jewel.settings.cols;
         messageCount = 0;
         callbacks = [];
-        worker = new Worker('scripts/board.worker.js');
-        jewel.dom.bind( worker, "message", messageHandler );
+        if(!worker){
+            worker = new Worker('scripts/board.worker.js');
+            jewel.dom.bind( worker, "message", messageHandler );
+        }
         var data = {
             settings : jewel.settings
             ,startJewels : startJewels

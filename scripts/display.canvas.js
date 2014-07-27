@@ -2,17 +2,18 @@
  * Created by pery on 04/07/14.
  */
 jewel.display = (function () {
-    var canvas,ctx,
-        cols, rows,
-        jewelSize,
-        firstRun = true,
-        jewelSprite,
-        jewels,
-        previousCycle,
-        animations = [],
-        paused,
-        cursor,
-        dom = jewel.dom
+    var canvas,ctx
+        ,cols, rows
+        ,jewelSize
+        ,firstRun = true
+        ,jewelSprite
+        ,jewels
+        ,previousCycle
+        ,animations = []
+        ,paused
+        ,cursor
+        ,dom = jewel.dom
+        ,$
 
     ;
 
@@ -37,17 +38,29 @@ jewel.display = (function () {
         return background;
     }
 
-    function setup(){
-        var $ = jewel.dom.$;
-        var boardElement = $('#game-screen .game-board' )[0];
+    function initialize( callback ){
+        paused = false;
+        if(firstRun){
+            dom = jewel.dom;
+            $ = dom.$;
 
+            setup();
+            jewelSprite = jewel.preload( 'images/jewels' + jewelSize + '.png',callback );
+            firstRun = false;
+        }else{
+            callback();
+        }
+    }
+
+    function setup(){
+
+        var boardElement = $('#jewel-screen .jewel-board' )[0];
         cols = jewel.settings.cols;
         rows = jewel.settings.rows;
 
         canvas = document.createElement('canvas');
         ctx = canvas.getContext('2d');
         jewel.dom.addClass(canvas, "board");
-
         var rect = boardElement.getBoundingClientRect();
         canvas.width = rect.width;
         canvas.height = rect.height;
@@ -397,27 +410,18 @@ jewel.display = (function () {
         requestAnimationFrame(cycle);
     }
 
-    function initialize( callback ){
-        paused = false;
-        if(firstRun){
-            setup();
-            jewelSprite = jewel.preload( 'images/jewels' + jewelSize + '.png',callback );
-            firstRun = false;
-        }else{
-            callback();
-        }
-    }
 
 
     function pause(){
-        return true;
+        paused = true;
     }
 
     function resume( pauseTime ){
-        paused = false;
-        for( var i=0; i<animations.length; i++ ){
-            animations[i].startTimeStamp +=pauseTime;
-        }
+
+       paused = false;
+       for( var i=0; i<animations.length; i++ ){
+           animations[i].startTimeStamp +=pauseTime;
+       }
     }
 
     return {

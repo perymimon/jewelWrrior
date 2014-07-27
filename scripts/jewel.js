@@ -88,7 +88,7 @@ var jewel  = (function(){
             executeScriptQueue();
         }
         image.src = src;
-    };
+    }
 
     /**
      * work only on apple products
@@ -123,7 +123,7 @@ var jewel  = (function(){
     function showScreen( screenId ){
         var dom = jewel.dom,
             $ = dom.$,
-            activeScreen = $("#game .screen.active")[0],
+            activeScreen = $("#jewel .screen.active")[0],
             screen = $('#' + screenId)[0]
         ;
         if( !jewel.screens[screenId]){

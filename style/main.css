@@ -216,7 +216,7 @@ ul.menu li button:active {
     z-index: 0;
 }
 
-/*game screen pause overlay*/
+/*jewel screen pause overlay*/
 #game-screen .pause-overlay{
     display: none;
     position: absolute;
@@ -319,7 +319,19 @@ ul.menu li button:active {
     float: left;
 }
 
+#about {
+    border: 0.12em gray solid;
+    box-sizing: border-box;
+    text-align: center;
+}
 
+#about .book{
+    color: #811408;
+}
+#about a{
+    text-shadow: 0.1em 0.1em 0.2em #838323,-0.1em -0.1em 0.2em #838323,0em 0 0.2em #1D1D1B;
+    color: rgb(247, 247, 220);
+}
 
 /* Anoouncement animation */
 /*key frames for webkit*/

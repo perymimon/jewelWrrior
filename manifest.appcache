@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Jewel Warrior cache manifest, rev 15
+# Jewel Warrior cache manifest, rev 18
 scripts/audio.js
 scripts/board.js
 scripts/board.worker.js
@@ -9,12 +9,13 @@ scripts/dom.js
 scripts/input.js
 scripts/storage.js
 # scripts/storage.cookie.js
-scripts/jewel.js
+scripts/game.js
 scripts/screen.game.js
 scripts/screen.high-scores.js
 scripts/screen.install.js
 scripts/screen.main-menu.js
 scripts/screen.splash.js
+scripts/screen.about.js
 scripts/storage.js
 
 images/jewels24.png
