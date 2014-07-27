@@ -22,7 +22,7 @@ jewel.audio = (function(){
         dom.bind(el, 'ended', function () {
             this.currentTime = 0;
 
-            cleanActive()
+            cleanActive
         });
         sounds[name] = sounds[name] || [];
 

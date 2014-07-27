@@ -296,7 +296,7 @@ jewel.board = (function () {
         }
     }
 
-    /* jewel function go here */
+    /* game function go here */
     return {
         initialize: initialize,
         print: print,

@@ -28,7 +28,7 @@ jewel.input = (function(){
         var dom = jewel.dom
             ,$ = dom.$
             ,controls = jewel.settings.controls
-            ,board = $('#jewel-screen .jewel-board')[0]
+            ,board = $('#game-screen .game-board')[0]
         ;
         inputHandlers = {};
         dom.bind( board, 'mousedown', function (event) {
@@ -101,7 +101,7 @@ jewel.input = (function(){
         ;
         if( !action ) return;
 
-        var board = jewel.dom.$('#jewel-screen .jewel-board')[0]
+        var board = jewel.dom.$('#game-screen .game-board')[0]
             ,rect = board.getBoundingClientRect()
             ,relX, relY
             ,jewelX, jewelY
@@ -165,7 +165,7 @@ jewel.input = (function(){
         var  handlers = inputHandlers[action]
             ,args = Array.prototype.slice.call(arguments,1)
         ;
-        console.log('jewel action: ' + action);
+        console.log('game action: ' + action);
 
         if( handlers ){
             for( var i=0; i<handlers.length; i++){

@@ -16,7 +16,6 @@ jewel.screens["game-screen"] = (function(){
         ,pauseStart
 /*cnst*/,STORAGE_KEY = 'activeGameData'
         ,STORAGE_KEY_LAST_SCORE = 'lastScore'
-        ,$pauseOverlay
     ;
 
     gameState = {};
@@ -26,7 +25,7 @@ jewel.screens["game-screen"] = (function(){
             level : 0,
             score : 0,
             startTimeStamp : 0, // time at start of level
-            levelDuration : 0, // time to jewel over
+            levelDuration : 0, // time to game over
             timer :   gameState.timer || 0 // setTimeout reference
         };
 
@@ -36,7 +35,7 @@ jewel.screens["game-screen"] = (function(){
         ;
 
         if( useActiveGame ){
-//            useActiveGame = window.confirm('Do you want to continue your previous jewel?');
+//            useActiveGame = window.confirm('Do you want to continue your previous game?');
             gameState.level = activeGame.level;
             gameState.score = activeGame.score;
             gameState.levelDuration = activeGame.levelDuration;
@@ -62,7 +61,9 @@ jewel.screens["game-screen"] = (function(){
             })
         });
         paused = false;
-        $pauseOverlay.style.display = 'none';
+        var dom = jewel.dom,
+            overlay = dom.$('#game-screen .pause-overlay')[0];
+        overlay.style.display = 'none';
 
     }
     function setup(){
@@ -72,14 +73,13 @@ jewel.screens["game-screen"] = (function(){
         display = jewel.display;
         storage = jewel.storage;
         $ = dom.$;
-        $pauseOverlay =  dom.$('#jewel-screen .pause-overlay')[0];
+
         audio.initialize();
 
         dom.bind('footer button.exit', 'click', exitGame );
         dom.bind('footer button.pause', 'click', pauseGame );
         dom.bind('footer button.reset', 'click', resetGame );
         dom.bind('.pause-overlay', 'click', resumeGame );
-
         var input = jewel.input;
         input.initialize();
         input.bind('selectJewel', selectJewel );
@@ -98,8 +98,8 @@ jewel.screens["game-screen"] = (function(){
     }
 
     function updateGameInfo(){
-        $('#jewel-screen .score span')[0].innerHTML = gameState.score;
-        $('#jewel-screen .level span')[0].innerHTML = gameState.level;
+        $('#game-screen .score span')[0].innerHTML = gameState.score;
+        $('#game-screen .level span')[0].innerHTML = gameState.level;
     }
 
 
@@ -117,7 +117,7 @@ jewel.screens["game-screen"] = (function(){
         if( delta < 0 ){
                gameOver();
         }else{
-            var $progress = $('#jewel-screen .time .indicator')[0]
+            var $progress = $('#game-screen .time .indicator')[0]
                 ,percent = (delta / gameState.levelDuration ) * 100
                 ;
             $progress.style.width = percent + '%';
@@ -145,21 +145,24 @@ jewel.screens["game-screen"] = (function(){
         if(paused){
             return;
         }
-        $pauseOverlay.style.display = 'block';
+        var dom = jewel.dom,
+            overlay = dom.$('#game-screen .pause-overlay')[0];
+        overlay.style.display = 'block';
         paused = true;
         pauseStart = Date.now();
         clearTimeout( gameState.timer );
-        gameState.timer = 0;
-        display.pause();
+        jewel.display.pause();
     }
 
     function resumeGame(){
-        $pauseOverlay.style.display = 'none';
+        var dom = jewel.dom,
+            overlay = dom.$('#game-screen .pause-overlay')[0];
+        overlay.style.display = 'none';
         paused = false;
         var pauseTime = Date.now()  -  pauseStart;
         gameState.startTimeStamp += pauseTime;
         setLevelTimer();
-        display.resume( pauseTime );
+        jewel.display.resume( pauseTime );
 
     }
 
@@ -188,7 +191,7 @@ jewel.screens["game-screen"] = (function(){
     }
 
     function announce( str ){
-        var element = $('#jewel-screen .announcement')[0]
+        var element = $('#game-screen .announcement')[0]
             ;
         element.innerHTML = str;
         dom.removeClass( element, 'zoomfade');
